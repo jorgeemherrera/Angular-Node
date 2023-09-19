@@ -6,12 +6,10 @@ const app = express();
 
 connectDB();
 
-app.use('/api/products', require('./routes/Product'))
+app.use(express.json());
 
-/* app.get('/', (req, resp) => {
-    resp.send('Hola Mundo')
-}) */
+app.use('/api/products', require('./routes/Product'));
 
 app.listen(4000, () => {
-    console.log('El servidor esta corriendo perfectamente')
+    console.log('El servidor esta corriendo perfectamente');
 })
