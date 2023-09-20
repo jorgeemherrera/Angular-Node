@@ -6,7 +6,7 @@
                     <span class="title">Product List</span>
                     <button class="btn btn-success float-end"
                         routerLink="/create-product">New Product</button>
-                    <table class="table table-striped mt-3">
+                    <table *ngIf="listProducts.length > 0" class="table table-striped mt-3">
                         <thead>
                             <tr>
                                 <th scope="col">Product</th>
@@ -18,36 +18,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                            <tr *ngFor="let product of listProducts">
+                                <td>{{product.product}}</td>
+                                <td>{{product.category}}</td>
+                                <td>{{product.location}}</td>
+                                <td>{{product.price | currency: 'COP'}}</td>
                                 <td>
-                                    <i
-                                        class="fa-regular fa-pen-to-square text-primary"></i>
-                                    <i class="fa-solid fa-trash-can text-danger"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>
-                                    <i
-                                        class="fa-regular fa-pen-to-square text-primary"></i>
-                                    <i class="fa-solid fa-trash-can text-danger"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>
-                                    <i
-                                        class="fa-regular fa-pen-to-square text-primary"></i>
-                                    <i class="fa-solid fa-trash-can text-danger"></i>
+                                    <i [routerLink]="['/edit-product', product._id]" class="fa-regular fa-pen-to-square text-primary"></i>
+                                    <i (click)="deleteProduct(product._id)" class="fa-solid fa-trash-can text-danger"></i>
                                 </td>
                             </tr>
                         </tbody>
+                        <h5 style="text-align: start; margin-top: 10px;" *ngIf="listProducts.length === 0">We don`t have products to show</h5>
                     </table>
                 </div>
             </div>
